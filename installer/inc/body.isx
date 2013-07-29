@@ -40,7 +40,6 @@
 #include "tasks-desktopicon.isx"
 #include "tasks-update-path.isx"
 #include "tasks-extensions.isx"
-#include "tasks-legacy.isx"
 #ifdef MagickDynamicPackage
   #include "tasks-install-devel.isx"
   #include "tasks-install-perlmagick.isx"

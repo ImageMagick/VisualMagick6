@@ -1,6 +1,5 @@
 // Configure.cpp : Defines the class behaviors for the application.
 //
-//
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_NONSTDC_NO_WARNINGS
 
@@ -376,7 +375,7 @@ void CConfigureApp::generate_a_dependency( ConfigureWorkspace *w,ConfigureProjec
           // NOTE: This is case sensitive - so be warned!
           if (flag2)
             {
-              if (LocalFind(strName,"CORE_%sMagickCore",0) == 0)
+              if (LocalFind(strName,"CORE_%smagick",0) == 0)
                 continue;
               if (LocalFindNoCase(strName,"CORE_%sMagick++",0) == 0)
                 continue;
@@ -456,8 +455,8 @@ void CConfigureApp::generate_dependencies( ConfigureProject *p,
   generate_a_dependency(workspace, p, "CORE_%sjpeg", false, true);
   generate_a_dependency(workspace, p, "LIBR_", true, false);
   generate_a_dependency(workspace, p, "CORE_", true, true);
-  generate_a_dependency_cs(workspace, p, "CORE_%sMagickCore");
-  generate_a_dependency_cs(workspace, p, "CORE_%sMagickWand");
+  generate_a_dependency_cs(workspace, p, "CORE_%smagick");
+  generate_a_dependency_cs(workspace, p, "CORE_%swand");
   if (add_cpp_depends)
     generate_a_dependency_cs(workspace, p, "CORE_%sMagick++");
   generate_a_dependency(workspace, p, (char *)MODULE_PREFIX, true, false);
@@ -724,7 +723,7 @@ void CConfigureApp::process_utility(
     extra += "..\\";
   includes_list.push_back(extra);
 
-  extra = "..\\MagickCore";
+  extra = "..\\magick";
   add_includes(includes_list, extra, levels-2);
 
   if (LocalFindNoCase(staging,"\\SDL",0) >= 0)
@@ -834,8 +833,8 @@ void CConfigureApp::process_utility(
           }
           if (exempt)
             {
-              workspace->write_project_dependency(project,"CORE_MagickCore");
-              workspace->write_project_dependency(project,"CORE_MagickWand");
+              workspace->write_project_dependency(project,"CORE_magick");
+              workspace->write_project_dependency(project,"CORE_wand");
               if (useX11Stubs)
                 workspace->write_project_dependency(project,"CORE_xlib");
             }
@@ -1042,10 +1041,10 @@ void CConfigureApp::process_library( const char *root,
   // Add OpenCL path
   if (with_opencl)
   {
-    if (strcmp(filename, "MagickCore") == 0 || strcmp(filename, "ojpeg") == 0 || 
-      strcmp(filename, "Magick++") == 0 || strcmp(filename, "MagickWand") == 0)
+    if (strcmp(filename, "magick") == 0 || strcmp(filename, "ojpeg") == 0 || 
+      strcmp(filename, "Magick++") == 0 || strcmp(filename, "wand") == 0)
       includes_list.push_back(opencl_include);
-    if (strcmp(filename, "MagickCore") == 0 || strcmp(filename, "ojpeg") == 0)
+    if (strcmp(filename, "magick") == 0 || strcmp(filename, "ojpeg") == 0)
     {
       lib_release_list.push_back("OpenCL.lib");
       lib_debug_list.push_back("OpenCL.lib");
@@ -1089,7 +1088,7 @@ void CConfigureApp::process_library( const char *root,
   if (dll && (runtime==MULTITHREADEDDLL))
     {
       workspace->write_begin_project(project, pname.c_str(), projectname.c_str());
-      if (name.compare("MagickCore") == 0)
+      if (name.compare("magick") == 0)
         {
           if (useX11Stubs)
             workspace->write_project_dependency(project,"CORE_xlib");
@@ -1116,21 +1115,21 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_wmf");
           if (useX11Stubs)
             workspace->write_project_dependency(project,"CORE_xlib");
-          workspace->write_project_dependency(project,"CORE_MagickWand");
-          workspace->write_project_dependency(project,"CORE_MagickCore");
+          workspace->write_project_dependency(project,"CORE_wand");
+          workspace->write_project_dependency(project,"CORE_magick");
         }
       if (name.compare("filters") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_MagickCore");
+          workspace->write_project_dependency(project,"CORE_magick");
         }
       if (name.compare("Magick++") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_MagickWand");
-          workspace->write_project_dependency(project,"CORE_MagickCore");
+          workspace->write_project_dependency(project,"CORE_wand");
+          workspace->write_project_dependency(project,"CORE_magick");
         }
       if (name.compare("SDL") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_MagickCore");
+          workspace->write_project_dependency(project,"CORE_magick");
         }
       if (name.compare("avi") == 0)
         {
@@ -1165,9 +1164,9 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_zlib");
         }
-      if (name.compare("MagickWand") == 0)
+      if (name.compare("wand") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_MagickCore");
+          workspace->write_project_dependency(project,"CORE_magick");
           if (useX11Stubs)
             workspace->write_project_dependency(project,"CORE_xlib");
         }
@@ -1239,7 +1238,7 @@ void CConfigureApp::process_module( const char *root,
   for (i=0; i<levels; i++)
     extra += "..\\";
   includes_list.push_back(extra);
-  extra = "..\\MagickCore";
+  extra = "..\\magick";
   add_includes(includes_list, extra, levels-2);
 
   if (name.compare("avi") == 0)
@@ -1441,7 +1440,7 @@ void CConfigureApp::process_module( const char *root,
     {
       workspace->write_begin_project(project, pname.c_str(), projectname.c_str());
       {
-        workspace->write_project_dependency(project,"CORE_MagickCore");
+        workspace->write_project_dependency(project,"CORE_magick");
         if (dependency.length() > 0)
           workspace->write_project_dependency(project,dependency.c_str());
         if (name.compare("avi") == 0)
@@ -3092,7 +3091,7 @@ BOOL CConfigureApp::InitInstance()
       waitdlg.Pumpit();
 
       standard_includes_list.push_back("..\\..");
-      //standard_includes_list.push_back("..\\..\\MagickCore");
+      //standard_includes_list.push_back("..\\..\\magick");
       standard_includes_list.push_back("..\\..\\xlib");
       standard_includes_list.push_back("..\\..\\Magick++\\lib");
       //standard_includes_list.push_back("..\\..\\MagickArgs");
@@ -3100,7 +3099,7 @@ BOOL CConfigureApp::InitInstance()
       // Write all library project files:
       if (projectType == MULTITHREADEDDLL)
         {
-          // FIXME: Only CORE_MagickCore, UTIL_animate, UTIL_display, &
+          // FIXME: Only CORE_magick, UTIL_animate, UTIL_display, &
           // UTIL_import should link with X11
           if (!useX11Stubs)
             {
@@ -3263,7 +3262,7 @@ void CConfigureApp::process_opencl_path()
 
     // enable MAGICKCORE__OPENCL in config file
     string str, line;
-    const char *cfg_filename             = "..\\MagickCore\\magick-baseconfig.h.in";
+    const char *cfg_filename             = "..\\magick\\magick-baseconfig.h.in";
     ifstream infile(cfg_filename, ifstream::in | ifstream::binary);
     if (infile.is_open())
     {
@@ -4411,7 +4410,7 @@ void ConfigureVS6Project::write_link_tool_dependencies( string &root, bool bNeed
         case MULTITHREADEDDLL:
           {
             string strDepends;
-            LocalFormat(strDepends,"CORE_%sMagickCore%s",strmode,"_.lib");
+            LocalFormat(strDepends,"CORE_%smagick%s",strmode,"_.lib");
             m_stream << " " << strDepends.c_str() << "";
             if (useX11Stubs)
               {
@@ -5205,12 +5204,12 @@ void ConfigureVS7Project::write_link_tool_dependencies( string &root,
         case MULTITHREADEDDLL:
           {
             string strDepends;
-            LocalFormat(strDepends,"CORE_%sMagickCore%s",strmode,"_.lib");
+            LocalFormat(strDepends,"CORE_%smagick%s",strmode,"_.lib");
             if (!bFirstTime)
               m_stream << " ";
             bFirstTime=false;
             m_stream << strDepends.c_str();
-            LocalFormat(strDepends,"CORE_%sMagickWand%s",strmode,"_.lib");
+            LocalFormat(strDepends,"CORE_%swand%s",strmode,"_.lib");
             if (!bFirstTime)
               m_stream << " ";
             bFirstTime=false;
