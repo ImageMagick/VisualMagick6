@@ -4421,15 +4421,17 @@ void ConfigureVS6Project::write_link_tool_begin( const char *input_path,
     {
     case DLLPROJECT:
     case EXEPROJECT:
-      m_stream << "LIB32=link.exe -lib" << endl;
-      m_stream << "LINK32=link.exe" << endl;
-      m_stream << "# ADD LINK32";
-      m_stream << " /libpath:\"";
-      for (list<string>::iterator it = additional_libdir_list.begin(); 
-           it != additional_libdir_list.end(); it++)
-        m_stream << *it << ";";
-      m_stream << input_path << "\"";
-      break;
+      {
+        m_stream << "LIB32=link.exe -lib" << endl;
+        m_stream << "LINK32=link.exe" << endl;
+        m_stream << "# ADD LINK32";
+        m_stream << " /libpath:\"";
+        for (list<string>::iterator it = additional_libdir_list.begin(); 
+             it != additional_libdir_list.end(); it++)
+          m_stream << *it << ";";
+        m_stream << input_path << "\"";
+        break;
+      }
     case LIBPROJECT:
       m_stream << "LIB32=link.exe -lib" << endl;
       m_stream << "# ADD LIB32";
@@ -5209,13 +5211,15 @@ void ConfigureVS7Project::write_link_tool_begin( const char *input_path,
     {
     case DLLPROJECT:
     case EXEPROJECT:
-      m_stream << "        Name=\"VCLinkerTool\"" << endl;
-      m_stream << "        AdditionalLibraryDirectories=\"";
-      for (list<string>::iterator it = additional_libdir_list.begin(); 
-           it != additional_libdir_list.end(); it++)
-        m_stream << *it << ";";
-      m_stream << input_path << "\"" << endl;
-      break;
+      {
+        m_stream << "        Name=\"VCLinkerTool\"" << endl;
+        m_stream << "        AdditionalLibraryDirectories=\"";
+        for (list<string>::iterator it = additional_libdir_list.begin(); 
+             it != additional_libdir_list.end(); it++)
+          m_stream << *it << ";";
+        m_stream << input_path << "\"" << endl;
+        break;
+      }
     case LIBPROJECT:
       m_stream << "        Name=\"VCLibrarianTool\"" << endl;
       break;
