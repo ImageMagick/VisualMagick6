@@ -5518,13 +5518,13 @@ void ConfigureVS7Project::write_file(string &filename)
       m_stream << "      <File RelativePath=\"" << filename << "\">" << endl;
       m_stream << "        <FileConfiguration Name=\"Debug|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
       m_stream << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (build64Bit ? "64" : "");
-      m_stream << " /nologo /c /safeseh /Cx /coff /Fo&quot;$(IntDir)\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" ";
-      m_stream << "Outputs=\"$(IntDir)\$(InputName).obj\"/>" << endl;
+      m_stream << " /nologo /c /safeseh /Cx /coff /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" ";
+      m_stream << "Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
       m_stream << "        </FileConfiguration>" << endl;
       m_stream << "        <FileConfiguration Name=\"Release|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
       m_stream << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (build64Bit ? "64" : "");
-      m_stream << " /nologo /c /safeseh /Cx /coff /Fo&quot;$(IntDir)\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" ";
-      m_stream << "Outputs=\"$(IntDir)\$(InputName).obj\"/>" << endl;
+      m_stream << " /nologo /c /safeseh /Cx /coff /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" ";
+      m_stream << "Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
       m_stream << "        </FileConfiguration>" << endl;
       m_stream << "      </File>" << endl;
     }
