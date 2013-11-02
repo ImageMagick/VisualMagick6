@@ -1140,6 +1140,11 @@ void CConfigureApp::process_library( const char *root,
         {
           workspace->write_project_dependency(project,"CORE_jpeg");
         }
+      if (name.compare("cairo") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_glib");
+          workspace->write_project_dependency(project,"CORE_png");
+        }
       if (name.compare("glib") == 0)
         {
           workspace->write_project_dependency(project,"CORE_ffi");
@@ -1155,6 +1160,12 @@ void CConfigureApp::process_library( const char *root,
       if (name.compare("mat") == 0)
         {
           workspace->write_project_dependency(project,"CORE_zlib");
+        }
+      if (name.compare("pango") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_cairo");
+          workspace->write_project_dependency(project,"CORE_glib");
+          workspace->write_project_dependency(project,"CORE_pixman");
         }
       if (name.compare("pdf") == 0)
         {
@@ -1262,6 +1273,13 @@ void CConfigureApp::process_module( const char *root,
   if (name.compare("mat") == 0)
     {
       extra = "..\\zlib";
+      add_includes(includes_list, extra, levels-2);
+    }
+  if (name.compare("pango") == 0)
+    {
+      extra = "..\\glib";
+      add_includes(includes_list, extra, levels-2);
+      extra = "..\\cairo";
       add_includes(includes_list, extra, levels-2);
     }
   if (name.compare("png") == 0)
@@ -1473,6 +1491,10 @@ void CConfigureApp::process_module( const char *root,
         if (name.compare("mat") == 0)
           {
             workspace->write_project_dependency(project,"CORE_zlib");
+          }
+        if (name.compare("pango") == 0)
+          {
+            workspace->write_project_dependency(project,"CORE_glib");
           }
         if (name.compare("png") == 0)
           {
