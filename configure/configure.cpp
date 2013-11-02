@@ -3409,7 +3409,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
   if (project_type != ADD_ON)
     outname += "_";
 
-  project->write_cpp_compiler_tool(root,extra_path,
+  project->write_cpp_compiler_tool(root,extra_path, outname,
                                    includes_list,standard_includes_list,defines_list,
                                    runtime, project_type, dll?DLLPROJECT:LIBPROJECT, 0);
 
@@ -3425,7 +3425,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
   project->write_link_tool(root,extra_path,module_definition_file,outname,bNeedsMagickpp,
                            bNeedsRelo,lib_shared_list,lib_release_list,additional_libdir_list,
                            get_full_path(root + "\\",lib_path).c_str(),
-                           dll?get_full_path(root + "\\",bin_path).c_str():get_full_path(root + "\\",lib_path).c_str(),
+                           get_full_path(root + "\\",dll?bin_path:lib_path).c_str(),
                            runtime, project_type, dll?DLLPROJECT:LIBPROJECT, 0);
 
   if (dll && isCOMproject)
@@ -3447,8 +3447,8 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
   project->write_configuration(libname.c_str(), (build64Bit ? "x64 Debug" : "Win32 Debug"), 1);
 
   project->write_properties(libname.c_str(),
-                            get_full_path(root + "\\",lib_path).c_str(), // output
-                            get_full_path(root + "\\",debug_path).c_str(), // intermediate
+                            get_full_path(root + "\\",dll?bin_path:lib_path).c_str(),
+                            get_full_path(root + "\\",debug_path).c_str(),
                             "", // target
                             dll?DLLPROJECT:LIBPROJECT, 1);
 
@@ -3461,7 +3461,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
   if (project_type != ADD_ON)
     outname += "_";
 
-  project->write_cpp_compiler_tool(root,extra_path,
+  project->write_cpp_compiler_tool(root,extra_path, outname,
                                    includes_list,standard_includes_list,defines_list,
                                    runtime, project_type, dll?DLLPROJECT:LIBPROJECT, 1);
 
@@ -3668,7 +3668,7 @@ ConfigureProject *CConfigureApp::write_project_exe(
     outname += "RL_";
   outname += dspname.c_str();
 
-  project->write_cpp_compiler_tool(root,extra_path,
+  project->write_cpp_compiler_tool(root,extra_path, outname,
                                    includes_list,standard_includes_list,defines_list,
                                    runtime, project_type, EXEPROJECT, 0);
 
@@ -3701,7 +3701,7 @@ ConfigureProject *CConfigureApp::write_project_exe(
     outname += "DB_";
   outname += dspname.c_str();
 
-  project->write_cpp_compiler_tool(root,extra_path,
+  project->write_cpp_compiler_tool(root,extra_path, outname,
                                    includes_list,standard_includes_list,defines_list,
                                    runtime, project_type, EXEPROJECT, 1);
 
@@ -3841,6 +3841,25 @@ ConfigureProject& ConfigureProject::operator=(const ConfigureProject& obj)
 ConfigureProject::ConfigureProject(const ConfigureProject& obj)
 {
   *this = obj;
+}
+
+int ConfigureProject::get_warning_level(string &outname)
+{
+  if (outname.substr(0, 7) == "IM_MOD_")
+    return 4;
+
+  if (outname == "analyze" || outname == "animate" || outname == "compare" ||
+      outname == "composite" || outname == "conjure" || outname == "convert" ||
+      outname == "display" || outname == "identify" || outname == "import" ||
+      outname == "IMDisplay" || outname == "mogrify" || outname == "montage" ||
+      outname == "stream")
+   return 4;
+
+  if (outname.find("_filters_") != -1 || outname.find("_magick_") != -1 ||
+      outname.find("_Magick++_") != -1 || outname.find("_wand_") != -1)
+    return 4;
+
+  return 0; // Turn warnings off for external libraries.
 }
 
 // Obtain list of sources from directory?
@@ -4345,19 +4364,21 @@ void ConfigureVS6Project::write_cpp_compiler_tool_runtime(
     }
 }
 
-void ConfigureVS6Project::write_cpp_compiler_tool_options( int type, int mode )
+void ConfigureVS6Project::write_cpp_compiler_tool_options( int type, int mode, string &outname )
 {
+  int warningLevel = get_warning_level(outname);
+
   switch (mode)
     {
     case 0:
 #ifndef SYMBOLS_ALWAYS
-      m_stream << " /W3 /GX /O2";
+      m_stream << " /W" << warningLevel <<" /GX /O2";
 #else
-      m_stream << " /W3 /GX /Zi /O2";
+      m_stream << " /W" << warningLevel <<" /GX /Zi /O2";
 #endif
       break;
     case 1:
-      m_stream << " /W3 /Gm /GX /Zi /Od";
+      m_stream << " /W" << warningLevel <<" /Gm /GX /Zi /Od";
       break;
     }
 }
@@ -4430,7 +4451,7 @@ void ConfigureVS6Project::write_cpp_compiler_tool_end( int type, int mode )
   m_stream << " /FD /c" << endl;
 }
 
-void ConfigureVS6Project::write_cpp_compiler_tool( string &root, string &extra_path,
+void ConfigureVS6Project::write_cpp_compiler_tool( string &root, string &extra_path, string &outname,
                                                    list<string> &includes_list,
                                                    list<string> &standard_includes_list,
                                                    list<string> &defines_list,
@@ -4441,7 +4462,7 @@ void ConfigureVS6Project::write_cpp_compiler_tool( string &root, string &extra_p
 
   write_cpp_compiler_tool_begin(type, mode);
   write_cpp_compiler_tool_runtime(runtime, type, mode);
-  write_cpp_compiler_tool_options(type, mode);
+  write_cpp_compiler_tool_options(type, mode, outname);
   write_cpp_compiler_tool_includes(root, extra_path, includes_list,
                                    standard_includes_list, standaloneMode);
   write_cpp_compiler_tool_defines(defines_list, type, mode, consoleMode, bDynamicMFC);
@@ -5091,12 +5112,13 @@ void ConfigureVS7Project::write_cpp_compiler_tool_runtime( int runtime,
 }
 
 void ConfigureVS7Project::write_cpp_compiler_tool_options( int type,
-                                                           int mode )
+                                                           int mode,
+                                                           string &outname )
 {
   m_stream << "        StringPooling=\"TRUE\"" << endl;
   //m_stream << "        ShowIncludes=\"TRUE\"" << endl;
   m_stream << "        EnableFunctionLevelLinking=\"TRUE\"" << endl; // /Gy
-  m_stream << "        WarningLevel=\"3\"" << endl; // /W3
+  m_stream << "        WarningLevel=\"" << get_warning_level(outname) << "\"" << endl; // /W3
   // pchNone 0,pchCreateUsingSpecific 1,pchGenerateAuto 2,pchUseUsingSpecific 3
   m_stream << "        UsePrecompiledHeader=\"0\"" << endl;
   m_stream << "        SuppressStartupBanner=\"TRUE\"" << endl; // /nologo
@@ -5216,8 +5238,7 @@ void ConfigureVS7Project::write_cpp_compiler_tool_end( int type, int mode )
   m_stream << "        />" << endl;
 }
 
-void ConfigureVS7Project::write_cpp_compiler_tool( string &root,
-                                                   string &extra_path,
+void ConfigureVS7Project::write_cpp_compiler_tool( string &root, string &extra_path, string &outname,
                                                    list<string> &includes_list,
                                                    list<string> &standard_includes_list,
                                                    list<string> &defines_list,
@@ -5230,7 +5251,7 @@ void ConfigureVS7Project::write_cpp_compiler_tool( string &root,
 
   write_cpp_compiler_tool_begin(type, mode);
   write_cpp_compiler_tool_runtime(runtime, type, mode);
-  write_cpp_compiler_tool_options(type, mode);
+  write_cpp_compiler_tool_options(type, mode, outname);
   write_cpp_compiler_tool_includes(root, extra_path, includes_list,
                                    standard_includes_list, standaloneMode);
   write_cpp_compiler_tool_defines(defines_list, type, mode, consoleMode, bDynamicMFC);
