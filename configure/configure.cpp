@@ -1095,21 +1095,20 @@ void CConfigureApp::process_library( const char *root,
       workspace->write_begin_project(project, pname.c_str(), projectname.c_str());
       if (name.compare("magick") == 0)
         {
-          if (useX11Stubs)
-            workspace->write_project_dependency(project,"CORE_xlib");
-          workspace->write_project_dependency(project,"CORE_jpeg");
-          workspace->write_project_dependency(project,"CORE_zlib");
           workspace->write_project_dependency(project,"CORE_bzlib");
+          workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_lcms");
-          workspace->write_project_dependency(project,"CORE_tiff");
-          workspace->write_project_dependency(project,"CORE_ttf");
           workspace->write_project_dependency(project,"CORE_libxml");
           workspace->write_project_dependency(project,"CORE_glib");
+          workspace->write_project_dependency(project,"CORE_tiff");
+          workspace->write_project_dependency(project,"CORE_ttf");
           workspace->write_project_dependency(project,"CORE_lqr");
+          if (useX11Stubs)
+            workspace->write_project_dependency(project,"CORE_xlib");
+          workspace->write_project_dependency(project,"CORE_zlib");
         }
       if (name.compare("coders") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_zlib");
           workspace->write_project_dependency(project,"CORE_bzlib");
           workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_jbig");
@@ -1119,6 +1118,7 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_ttf");
           workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_wmf");
+          workspace->write_project_dependency(project,"CORE_zlib");
           if (useX11Stubs)
             workspace->write_project_dependency(project,"CORE_xlib");
           workspace->write_project_dependency(project,"CORE_wand");
@@ -5316,7 +5316,7 @@ void ConfigureVS7Project::write_link_tool_dependencies( string &root,
       break;
     }
   if (!build64Bit)
-    m_stream << "        AdditionalDependencies=\" ";
+    m_stream << "        AdditionalDependencies=\"/MACHINE:X86 ";
   else
     m_stream << "        AdditionalDependencies=\"/MACHINE:AMD64 ";
   if (onebigdllMode || (standaloneMode && (type == EXEPROJECT)))

@@ -34,6 +34,28 @@ function CreateTargetName($xml, $configuration)
   [void]$outputFile.ParentNode.RemoveChild($outputFile)
 }
 
+function EnableMultiProcessorCompilation($xml)
+{
+  $uri = "http://schemas.microsoft.com/developer/msbuild/2003"
+
+  [System.Xml.XmlNamespaceManager] $nsmgr = $xml.NameTable;
+  $nsmgr.AddNamespace("msb", $uri);
+
+  $clCompiles = $xml.SelectNodes("//msb:ClCompile", $nsmgr)
+  foreach ($clCompile in $clCompiles)
+  {
+    $multiProcessorCompilation = $clCompile.SelectSingleNode("msb:MultiProcessorCompilation", $nsmgr)
+    if ($multiProcessorCompilation -ne $null)
+    {
+      continue;
+    }
+
+    $multiProcessorCompilation = $xml.CreateElement("MultiProcessorCompilation", $uri)
+    $multiProcessorCompilation.InnerText = "true"
+    [void]$clCompile.AppendChild($multiProcessorCompilation)
+  }
+}
+
 function FixProjectFile($fileName)
 {
   Write-Host "Fixing: $fileName"
@@ -41,6 +63,7 @@ function FixProjectFile($fileName)
   $xml = [xml](get-content $fileName)
   CreateTargetName $xml "Debug"
   CreateTargetName $xml "Release"
+  EnableMultiProcessorCompilation $xml
   $xml.Save($fileName)
 }
 
