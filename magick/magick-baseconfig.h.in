@@ -310,7 +310,6 @@ typedef long ssize_t;
 #ifdef _MSC_VER
 #pragma warning(disable: 4054)
 #pragma warning(disable: 4055)
-#pragma warning(disable: 4100)
 #pragma warning(disable: 4130)
 #pragma warning(disable: 4431)
 #endif
