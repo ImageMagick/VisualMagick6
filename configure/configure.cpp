@@ -2088,6 +2088,7 @@ void CConfigureApp::process_project_replacements( const char *root,
                         renamed += "\\";
                         renamed += newstype;
                         s5 = renamed.c_str();
+                        DeleteFile(s5);
                         MoveFile(s1,s5);
                       }
                   }
