@@ -26,6 +26,7 @@ EXCLUDE = gmodule-dl.c
 EXCLUDE = gmodule-dld.c
 EXCLUDE = gmodule-dyld.c
 EXCLUDE = gmodule-os2.c
+EXCLUDE = gmodule-win32.c
 EXCLUDE = gobject-query.c
 EXCLUDE = gspawn.c
 EXCLUDE = gspawn-win32-helper.c
