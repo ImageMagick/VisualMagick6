@@ -110,6 +110,10 @@ $$X11
 // Define to use the PNG library
 #define MAGICKCORE_PNG_DELEGATE
 
+// Define to use the RSVG library
+#define MAGICKCORE_RSVG_DELEGATE
+#define MAGICKCORE_CAIRO_DELEGATE
+
 // Define to use the TIFF library
 #define MAGICKCORE_TIFF_DELEGATE
 
