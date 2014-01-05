@@ -5714,17 +5714,23 @@ void ConfigureVS7Project::write_file(string &filename)
   if (!can_write_file(filename))
     return;
 
+  if (filename == "..\\..\\coders\\emf.c") // This file will be compiled with the c++ compiler.
+  {
+    m_stream << "      <File RelativePath=\"..\\..\\coders\\emf.c\">" << endl;
+    m_stream << "        <FileConfiguration Name=\"Debug|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
+    m_stream << "          <Tool Name=\"VCCLCompilerTool\" CompileAs=\"2\"/>" << endl;
+    m_stream << "        </FileConfiguration>" << endl;
+    m_stream << "        <FileConfiguration Name=\"Release|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
+    m_stream << "          <Tool Name=\"VCCLCompilerTool\" CompileAs=\"2\"/>" << endl;
+    m_stream << "        </FileConfiguration>" << endl;
+    m_stream << "      </File>" << endl;
+    return;
+  }
+
   int index = filename.find_last_of("\\");
   string name = filename.substr(index + 1);
-  int count = 1;
-  if (name.substr(name.find_last_of(".")) == ".c")
-   {
-     if (m_fileNames.find(name) == m_fileNames.end())
-       m_fileNames.insert(make_pair(name, count));
-     else
-       count = ++m_fileNames[name];
-   }
-  else if (name.substr(name.find_last_of(".")) == ".asm")
+
+  if (name.substr(name.find_last_of(".")) == ".asm")
     {
       m_stream << "      <File RelativePath=\"" << filename << "\">" << endl;
       m_stream << "        <FileConfiguration Name=\"Debug|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
@@ -5738,8 +5744,10 @@ void ConfigureVS7Project::write_file(string &filename)
       m_stream << "Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
       m_stream << "        </FileConfiguration>" << endl;
       m_stream << "      </File>" << endl;
+      return;
     }
-  else if (name.substr(name.find_last_of(".")) == ".nasm")
+
+  if (name.substr(name.find_last_of(".")) == ".nasm")
     {
       string folder = filename.substr(0, index + 1);
       m_stream << "      <File RelativePath=\"" << filename << "\">" << endl;
@@ -5754,7 +5762,17 @@ void ConfigureVS7Project::write_file(string &filename)
       m_stream << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
       m_stream << "        </FileConfiguration>" << endl;
       m_stream << "      </File>" << endl;
+      return;
     }
+
+  int count = 1;
+  if (name.substr(name.find_last_of(".")) == ".c")
+   {
+     if (m_fileNames.find(name) == m_fileNames.end())
+       m_fileNames.insert(make_pair(name, count));
+     else
+       count = ++m_fileNames[name];
+   }
 
   if (count == 1)
     {
