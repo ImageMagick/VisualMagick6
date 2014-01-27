@@ -25,5 +25,5 @@
 #include "inc\body.isx"
 
 #ifdef Debug
-  #expr SaveToFile(AddBackslash(SourcePath) + "im-x86-dll-Q16.isp")
+  #expr SaveToFile(AddBackslash(SourcePath) + "im-x86-dll-Q8.isp")
 #endif
