@@ -18,11 +18,11 @@
 ; #pragma verboselevel 4
 ; #define DEBUG 1
 
-#define  public MagickDynamicPackage 1
-#define  public QuantumDepth "8"
+#define  public MagickStaticPackage 1
+#define  public QuantumDepth "16"
 ; #define  public X11DynamicPackage 1
 #include "inc\body.isx"
 
 #ifdef Debug
-  #expr SaveToFile(AddBackslash(SourcePath) + "im-x86-dynamic-Q8.isp")
+  #expr SaveToFile(AddBackslash(SourcePath) + "im-x86-static-Q8.isp")
 #endif
