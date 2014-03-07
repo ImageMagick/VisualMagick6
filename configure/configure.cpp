@@ -1116,12 +1116,6 @@ void CConfigureApp::process_library( const char *root,
   if (with_opencl && openCL)
   {
     includes_list.push_back(opencl_include);
-    if (strcmp(filename, "magick") == 0 || strcmp(filename, "ojpeg") == 0)
-    {
-      lib_release_list.push_back("OpenCL.lib");
-      lib_debug_list.push_back("OpenCL.lib");
-      additional_libdir_list.push_back(build64Bit?opencl_libdir_x64:opencl_libdir);
-    }
   }
 
 #ifdef _DEBUG
@@ -1515,9 +1509,6 @@ void CConfigureApp::process_module( const char *root,
     {
       extra = "..\\ojpeg";
       add_includes(includes_list, extra, levels-2);
-      lib_release_list.push_back("OpenCL.lib");
-      lib_debug_list.push_back("OpenCL.lib");
-      additional_libdir_list.push_back(opencl_libdir);
       dependency = "CORE_ojpeg";
     }
     if (name.compare("ojpeg") == 0)
@@ -3428,32 +3419,19 @@ void CConfigureApp::process_opencl_path()
       opencl_include = string(opencl_sdk_path) + "\\include";
       with_opencl = doesDirExist(opencl_include);
       if (with_opencl)
-        {
-          opencl_libdir = string(opencl_sdk_path) + "\\lib\\x86";
-          opencl_libdir_x64 = string(opencl_sdk_path) + "\\lib\\x86_64";
-          return;
-        }
+        return;
     }
   if ((opencl_sdk_path = getenv("CUDA_PATH")) != NULL)
     {
       opencl_include = string(opencl_sdk_path) + "\\include";
       with_opencl = doesDirExist(opencl_include);
       if (with_opencl)
-        {
-          opencl_libdir = string(opencl_sdk_path) + "\\lib\\Win32";
-          opencl_libdir_x64 = string(opencl_sdk_path) + "\\lib\\x64";
           return;
-        }
     }
   if ((opencl_sdk_path = getenv("INTELOCLSDKROOT")) != NULL)
     {
       opencl_include = string(opencl_sdk_path) + "\\include";
       with_opencl = doesDirExist(opencl_include);
-      if (with_opencl)
-        {
-          opencl_libdir = string(opencl_sdk_path) + "\\lib\\x86";
-          opencl_libdir_x64 = string(opencl_sdk_path) + "\\lib\\x64";
-        }
     }
 }
 
@@ -3516,7 +3494,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
   project->write_configuration(libname.c_str(), (build64Bit ? "x64 Release" : "Win32 Release"), 0);
 
   project->write_properties(libname.c_str(),
-                            get_full_path(root + "\\",dll?bin_path:lib_path).c_str(), // output
+                            get_full_path(root + "\\",lib_path).c_str(), // output
                             get_full_path(root + "\\",release_path).c_str(), // intermediate
                             "", // target
                             dll?DLLPROJECT:LIBPROJECT, 0);
