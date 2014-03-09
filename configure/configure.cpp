@@ -1260,10 +1260,6 @@ void CConfigureApp::process_library( const char *root,
         {
           workspace->write_project_dependency(project,"CORE_zlib");
         }
-      if (name.compare("ps3") == 0)
-        {
-          workspace->write_project_dependency(project,"CORE_zlib");
-        }
       if (name.compare("psd") == 0)
         {
           workspace->write_project_dependency(project,"CORE_zlib");
