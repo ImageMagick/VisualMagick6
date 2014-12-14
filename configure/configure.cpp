@@ -1171,6 +1171,7 @@ void CConfigureApp::process_library( const char *root,
       if (name.compare("coders") == 0)
         {
           workspace->write_project_dependency(project,"CORE_bzlib");
+          workspace->write_project_dependency(project,"CORE_exr");
           workspace->write_project_dependency(project,"CORE_glib");
           workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_jbig");
