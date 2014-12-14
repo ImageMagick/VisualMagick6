@@ -1210,6 +1210,10 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_glib");
           workspace->write_project_dependency(project,"CORE_png");
         }
+      if (name.compare("exr") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_zlib");
+        }
       if (name.compare("glib") == 0)
         {
           workspace->write_project_dependency(project,"CORE_ffi");

@@ -1,0 +1,8 @@
+#ECF - this file contains additional configuration info.
+DEFINE = _CRT_SECURE_NO_WARNINGS
+DEFINE = _CRT_NONSTDC_NO_WARNINGS
+DEFINE = ILMIMF_EXPORTS
+RESOURCE = exr.rc
+EXCLUDE = eLut.cpp
+EXCLUDE = toFloat.cpp
+EXCLUDE = b44ExpLogTable.cpp
