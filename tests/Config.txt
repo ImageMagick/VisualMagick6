@@ -16,4 +16,4 @@ TEST
 coders
 filters
 Magick++
-Magick
+magick

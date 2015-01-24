@@ -16,4 +16,4 @@ DEMO
 coders
 filters
 Magick++
-Magick
+magick

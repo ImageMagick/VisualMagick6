@@ -11,7 +11,7 @@
 coders
 filters
 Magick++
-Magick
+magick
 
 [WARNING_LEVEL]
 4

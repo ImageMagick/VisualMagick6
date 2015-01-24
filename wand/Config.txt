@@ -15,7 +15,7 @@ drawtest.c
 wandtest.c
 
 [DEPENDENCIES]
-Magick
+magick
 
 [WARNING_LEVEL]
 4

@@ -6,11 +6,11 @@
 
 [INCLUDES]
 ..\..
-..\..\Magick
+..\..\magick
 
 [DEPENDENCIES]
-Magick
-MagickWand
+magick
+wand
 
 [WARNING_LEVEL]
 4

@@ -14,8 +14,8 @@ MagickCMD.cpp
 [DEPENDENCIES]
 coders
 filters
-Magick
-Wand
+magick
+wand
 
 [WARNING_LEVEL]
 3
