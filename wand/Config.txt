@@ -4,11 +4,11 @@
 _MAGICKLIB_
 
 [DIRECTORIES]
-..\..\Wand
+..\..\ImageMagick\Wand
 
 [INCLUDES]
-..\..
-..\..\Magick
+..\..\ImageMagick
+..\..\ImageMagick\Magick
 
 [EXCLUDES]
 drawtest.c

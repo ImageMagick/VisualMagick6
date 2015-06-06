@@ -1,12 +1,12 @@
 [DLL]
 
 [DIRECTORIES]
-..\..\Magick++\lib
-..\..\Magick++\lib\Magick++
+..\..\ImageMagick\Magick++\lib
+..\..\ImageMagick\Magick++\lib\Magick++
 
 [INCLUDES]
-..\..
-..\..\magick
+..\..\ImageMagick
+..\..\ImageMagick\magick
 
 [DEPENDENCIES]
 magick

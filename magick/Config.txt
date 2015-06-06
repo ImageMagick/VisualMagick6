@@ -4,10 +4,10 @@
 _MAGICKLIB_
 
 [DIRECTORIES]
-..\..\magick
+..\..\ImageMagick\magick
 
 [INCLUDES]
-..\..
+..\..\ImageMagick
 ..\..\bzlib
 ..\..\glib
 ..\..\glib\glib
