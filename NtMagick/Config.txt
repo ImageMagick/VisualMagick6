@@ -14,3 +14,5 @@ coders
 filters
 Magick++
 magick
+
+[UNICODE]

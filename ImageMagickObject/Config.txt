@@ -17,5 +17,7 @@ filters
 magick
 wand
 
+[UNICODE]
+
 [WARNING_LEVEL]
 3

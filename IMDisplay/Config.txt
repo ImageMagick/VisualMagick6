@@ -13,5 +13,7 @@ filters
 Magick++
 magick
 
+[UNICODE]
+
 [WARNING_LEVEL]
 4
