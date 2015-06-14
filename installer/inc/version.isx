@@ -19,4 +19,4 @@
 #define public MagickPackageName "ImageMagick"
 #define public MagickPackageVersion "6.9.1"
 #define public MagickPackageVersionAddendum "-6"
-#define public MagickPackageReleaseDate  GetDateTimeString("yyyy/mm/dd", "-", "")
+#define public MagickPackageReleaseDate GetDateTimeString("yyyy/mm/dd", "-", "")
