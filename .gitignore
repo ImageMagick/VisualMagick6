@@ -6,6 +6,7 @@ ImageMagickObject/vc*
 /bin
 /Debug
 /lib
+/Release
 
 /bzlib
 /cairo
@@ -34,7 +35,9 @@ ImageMagickObject/vc*
 /webp
 /zlib
 
-*.opensdf
+*.ipch
+*.opendb
 *.sdf
 *.sln
+*.suo
 *.user
