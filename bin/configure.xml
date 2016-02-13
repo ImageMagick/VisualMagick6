@@ -8,8 +8,8 @@
 <configuremap>
   <configure name="NAME" value="ImageMagick"/>
   <configure name="LIB_VERSION" value="0x693"/>
-  <configure name="LIB_VERSION_NUMBER" value="6,9,3,4"/>
-  <configure name="RELEASE_DATE" value="2016-02-15"/>
+  <configure name="LIB_VERSION_NUMBER" value="6,9,3,5"/>
+  <configure name="RELEASE_DATE" value="2016-03-15"/>
   <configure name="VERSION" value="6.9.3"/>
   <configure name="CC" value="vs10"/>
   <configure name="HOST" value="Windows"/>
