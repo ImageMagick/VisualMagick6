@@ -1,0 +1,5 @@
+[INCLUDES]
+..\..\libraw\libraw
+
+[DEPENDENCIES]
+libraw
