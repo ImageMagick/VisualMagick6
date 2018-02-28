@@ -12,6 +12,7 @@ _MAGICKLIB_
 ..\..\glib
 ..\..\glib\glib
 ..\..\lcms\include
+..\..\libxml\include
 ..\..\lqr
 ..\..\lqr\lqr
 ..\..\ttf\include
@@ -26,6 +27,7 @@ widget.c
 bzlib
 glib
 lcms
+libxml
 lqr
 ttf
 zlib
