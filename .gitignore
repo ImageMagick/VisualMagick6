@@ -18,6 +18,7 @@ ImageMagickObject/vc*
 /exr
 /ffi
 /flif
+/freetype
 /glib
 /iptcutil
 /jbig
@@ -37,7 +38,6 @@ ImageMagickObject/vc*
 /pixman
 /png
 /tiff
-/ttf
 /webp
 /zlib
 
