@@ -8,9 +8,9 @@
 <configuremap>
   <configure name="NAME" value="ImageMagick"/>
   <configure name="LIB_VERSION" value="0x69B"/>
-  <configure name="LIB_VERSION_NUMBER" value="6,9,11,11"/>
-  <configure name="RELEASE_DATE" value="2020-05-01"/>
-  <configure name="VERSION" value="6.9.10"/>
+  <configure name="LIB_VERSION_NUMBER" value="6,9,11,12"/>
+  <configure name="RELEASE_DATE" value="2020-06-01"/>
+  <configure name="VERSION" value="6.9.11"/>
   <configure name="CC" value="vs10"/>
   <configure name="HOST" value="Windows"/>
   <configure name="DELEGATES" value="bzlib freetype jpeg jp2 lcms png raw tiff x11 xml wmf zlib"/>
