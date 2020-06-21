@@ -16,6 +16,7 @@ bin
 /lib
 /Release
 
+/aom
 /bzlib
 /cairo
 /configure
