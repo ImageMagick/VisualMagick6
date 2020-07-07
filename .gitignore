@@ -57,3 +57,4 @@ bin
 *.suo
 *.user
 *.exe
+*.filters
