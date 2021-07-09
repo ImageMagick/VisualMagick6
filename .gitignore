@@ -50,6 +50,7 @@ bin
 /PerlMagick
 /pixman
 /png
+/raqm
 /tiff
 /webp
 /zlib
