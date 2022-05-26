@@ -13,10 +13,10 @@ _MAGICKLIB_
 ..\..\glib
 ..\..\glib\glib
 ..\..\lcms\include
-..\..\libxml\include
 ..\..\lqr
 ..\..\lqr\lqr
 ..\..\raqm\src
+..\..\xml\include
 ..\..\zlib
 
 [EXCLUDES]
@@ -28,9 +28,9 @@ widget.c
 bzlib
 freetype
 lcms
-libxml
 lqr
 raqm
+xml
 zlib
 
 [WARNING_LEVEL]
