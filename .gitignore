@@ -21,6 +21,7 @@ bin
 /configure
 /croco
 /dcraw
+/de265
 /demos
 /exr
 /ffi
@@ -29,18 +30,14 @@ bin
 /fribidi
 /glib
 /harfbuzz
+/heif
 /iptcutil
 /jbig
 /jp2
 /jpeg-turbo
 /lcms
-/libde265
-/libheif
-/liblzma
-/libraw
-/librsvg
-/libxml
 /lqr
+/lzma
 /openjpeg
 /OpenCL
 /pango
@@ -48,8 +45,11 @@ bin
 /pixman
 /png
 /raqm
+/raw
+/rsvg
 /tiff
 /webp
+/xml
 /zlib
 
 NOTICE.txt
