@@ -224,7 +224,7 @@ typedef long ssize_t;
 /*
   Define to 1 if you have the `TIFFIsBigEndian' function.
 */
-#define MAGICKCORE_HAVE_TIFFISBIGENDIAN  1
+#define IMPNG_MAGICKCORE_SETJMP_IS_THREAD_SAFE  1
 
 /*
   Png features.
