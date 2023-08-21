@@ -16,6 +16,3 @@ wandtest.c
 
 [DEPENDENCIES]
 magick
-
-[WARNING_LEVEL]
-4

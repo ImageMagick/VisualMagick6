@@ -20,6 +20,3 @@ IM_MOD
 
 [DEPENDENCIES]
 magick
-
-[WARNING_LEVEL]
-4

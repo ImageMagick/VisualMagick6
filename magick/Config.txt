@@ -32,6 +32,3 @@ lqr
 raqm
 xml
 zlib
-
-[WARNING_LEVEL]
-4

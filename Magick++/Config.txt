@@ -12,6 +12,3 @@ ImageMagick\Magick++\lib
 [DEPENDENCIES]
 magick
 wand
-
-[WARNING_LEVEL]
-4

@@ -19,6 +19,3 @@ coders
 filters
 magick
 wand
-
-[WARNING_LEVEL]
-4
