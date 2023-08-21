@@ -1,11 +1,11 @@
 [APP]
 
 [DIRECTORIES]
-..\..\win2k\IMDisplay
+win2k\IMDisplay
 
 [INCLUDES]
-..\..\ImageMagick
-..\..\ImageMagick\Magick++\lib
+ImageMagick
+ImageMagick\Magick++\lib
 
 [DEPENDENCIES]
 coders

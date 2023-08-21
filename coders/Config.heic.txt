@@ -1,6 +1,6 @@
 [INCLUDES]
-..\..\heif
-..\..\heif\libheif
+heif
+heif\libheif
 
 [DEPENDENCIES]
 heif

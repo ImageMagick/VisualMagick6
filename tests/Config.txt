@@ -3,11 +3,11 @@
 [OPTIONAL]
 
 [DIRECTORIES]
-..\..\ImageMagick\Magick++\tests
+ImageMagick\Magick++\tests
 
 [INCLUDES]
-..\..\ImageMagick
-..\..\ImageMagick\Magick++\lib
+ImageMagick
+ImageMagick\Magick++\lib
 
 [MODULE_PREFIX]
 TEST

@@ -6,10 +6,10 @@ LIBHEIF_STATIC_BUILD
 LIBDE265_STATIC_BUILD
 
 [DIRECTORIES]
-..\..\ImageMagick\coders
+ImageMagick\coders
 
 [INCLUDES]
-..\..\ImageMagick
+ImageMagick
 
 [EXCLUDES]
 x.c

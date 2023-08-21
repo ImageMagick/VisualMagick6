@@ -3,11 +3,11 @@
 [OPTIONAL]
 
 [DIRECTORIES]
-..\..\contrib\win32\MFC\NtMagick
+contrib\win32\MFC\NtMagick
 
 [INCLUDES]
-..\..\ImageMagick
-..\..\ImageMagick\Magick++\lib
+ImageMagick
+ImageMagick\Magick++\lib
 
 [DEPENDENCIES]
 coders
