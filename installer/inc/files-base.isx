@@ -27,7 +27,6 @@ Source: "..\bin\mogrify.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversi
 Source: "..\bin\montage.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\stream.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\hp2xx.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
-Source: "..\bin\ffmpeg.exe"; DestDir: {#MagickAppDirectory}; Tasks: install_FFmpeg; Flags: ignoreversion
 Source: "..\bin\dcraw.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 
 ; Path Tool
